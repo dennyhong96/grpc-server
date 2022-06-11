@@ -3,6 +3,7 @@
 'use strict';
 var grpc = require('grpc');
 var house_pb = require('./house_pb.js');
+var google_protobuf_wrappers_pb = require('google-protobuf/google/protobuf/wrappers_pb.js');
 
 function serialize_houseservice_HouseRequest(arg) {
   if (!(arg instanceof house_pb.HouseRequest)) {

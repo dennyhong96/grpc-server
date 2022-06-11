@@ -15,25 +15,30 @@ import { Mapper } from "./mapping";
 // Mock DB
 const allHouse: House.AsObject[] = [
   {
-    id: 1,
-    housenumber: "123",
-    squarefeet: 1200,
-    streetname: "Funny Street",
-    numberofbedrooms: 3,
+    id: { value: 1 },
+    housenumber: { value: "123" },
+    squarefeet: { value: 1200 },
+    streetname: { value: "Funny Street" },
+    numberofbedrooms: { value: 3 },
+    onsale: { value: true },
+    isrental: { value: true },
   },
   {
-    id: 2,
-    housenumber: "500",
-    squarefeet: 2000,
-    streetname: "Zoo",
-    numberofbedrooms: 1,
+    id: { value: 2 },
+    housenumber: { value: "124" },
+    squarefeet: { value: 1500 },
+    streetname: { value: "Zoo" },
+    numberofbedrooms: { value: 3 },
+    onsale: { value: true },
+    isrental: { value: true },
   },
   {
-    id: 3,
-    housenumber: "67",
-    squarefeet: 890,
-    streetname: "Spring Cir",
-    numberofbedrooms: 4,
+    id: { value: 3 },
+    housenumber: { value: "125" },
+    squarefeet: { value: 1700 },
+    streetname: { value: "ZooYork" },
+    numberofbedrooms: { value: 3 },
+    onsale: { value: true },
   },
 ];
 
@@ -44,8 +49,17 @@ class HouseSerivce implements IHouseServiceServer {
   ) {
     // Get params from request
     const min = request.getMinsquarefeet();
+
     // Fetch data from DB
-    const ids = allHouse.filter((h) => h.squarefeet >= min).map((h) => h.id);
+    const ids = allHouse
+      .filter(
+        (h) =>
+          h.id !== undefined &&
+          h.squarefeet !== undefined &&
+          h.squarefeet.value >= min
+      )
+      .map((h) => h.id!.value);
+
     // Create a response
     const response = new HousesBySizeResponse();
     response.setIdsList(ids);
@@ -58,7 +72,9 @@ class HouseSerivce implements IHouseServiceServer {
     callback: grpc.sendUnaryData<HouseResponse>
   ) {
     const id = request.getId();
-    const houseObj = allHouse.find((h) => h.id === id);
+    const houseObj = allHouse
+      .filter((h) => h.id !== undefined)
+      .find((h) => h.id!.value === id);
     const house = houseObj ? Mapper.house(houseObj) : undefined;
     const response = new HouseResponse();
     response.setHouse(house);
@@ -70,7 +86,9 @@ class HouseSerivce implements IHouseServiceServer {
     callback: grpc.sendUnaryData<HousesResponse>
   ) {
     const ids = request.getIdsList();
-    const houseObjs = allHouse.filter((h) => ids.includes(h.id));
+    const houseObjs = allHouse.filter(
+      (h) => h.id !== undefined && ids.includes(h.id!.value)
+    );
     const houses = Mapper.houses(houseObjs);
     const response = new HousesResponse();
     response.setHouseList(houses);

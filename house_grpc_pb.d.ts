@@ -6,6 +6,7 @@
 
 import * as grpc from "grpc";
 import * as house_pb from "./house_pb";
+import * as google_protobuf_wrappers_pb from "google-protobuf/google/protobuf/wrappers_pb";
 
 interface IHouseServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getHousesBySize: IHouseServiceService_IGetHousesBySize;

@@ -15,6 +15,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+var google_protobuf_wrappers_pb = require('google-protobuf/google/protobuf/wrappers_pb.js');
+goog.object.extend(proto, google_protobuf_wrappers_pb);
 goog.exportSymbol('proto.houseservice.House', null, global);
 goog.exportSymbol('proto.houseservice.HouseRequest', null, global);
 goog.exportSymbol('proto.houseservice.HouseResponse', null, global);
@@ -201,11 +203,13 @@ proto.houseservice.House.prototype.toObject = function(opt_includeInstance) {
  */
 proto.houseservice.House.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    streetname: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    housenumber: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    squarefeet: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    numberofbedrooms: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    id: (f = msg.getId()) && google_protobuf_wrappers_pb.Int32Value.toObject(includeInstance, f),
+    streetname: (f = msg.getStreetname()) && google_protobuf_wrappers_pb.StringValue.toObject(includeInstance, f),
+    housenumber: (f = msg.getHousenumber()) && google_protobuf_wrappers_pb.StringValue.toObject(includeInstance, f),
+    squarefeet: (f = msg.getSquarefeet()) && google_protobuf_wrappers_pb.Int32Value.toObject(includeInstance, f),
+    numberofbedrooms: (f = msg.getNumberofbedrooms()) && google_protobuf_wrappers_pb.Int32Value.toObject(includeInstance, f),
+    onsale: (f = msg.getOnsale()) && google_protobuf_wrappers_pb.BoolValue.toObject(includeInstance, f),
+    isrental: (f = msg.getIsrental()) && google_protobuf_wrappers_pb.BoolValue.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -243,24 +247,39 @@ proto.houseservice.House.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = new google_protobuf_wrappers_pb.Int32Value;
+      reader.readMessage(value,google_protobuf_wrappers_pb.Int32Value.deserializeBinaryFromReader);
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = new google_protobuf_wrappers_pb.StringValue;
+      reader.readMessage(value,google_protobuf_wrappers_pb.StringValue.deserializeBinaryFromReader);
       msg.setStreetname(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = new google_protobuf_wrappers_pb.StringValue;
+      reader.readMessage(value,google_protobuf_wrappers_pb.StringValue.deserializeBinaryFromReader);
       msg.setHousenumber(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = new google_protobuf_wrappers_pb.Int32Value;
+      reader.readMessage(value,google_protobuf_wrappers_pb.Int32Value.deserializeBinaryFromReader);
       msg.setSquarefeet(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = new google_protobuf_wrappers_pb.Int32Value;
+      reader.readMessage(value,google_protobuf_wrappers_pb.Int32Value.deserializeBinaryFromReader);
       msg.setNumberofbedrooms(value);
+      break;
+    case 6:
+      var value = new google_protobuf_wrappers_pb.BoolValue;
+      reader.readMessage(value,google_protobuf_wrappers_pb.BoolValue.deserializeBinaryFromReader);
+      msg.setOnsale(value);
+      break;
+    case 7:
+      var value = new google_protobuf_wrappers_pb.BoolValue;
+      reader.readMessage(value,google_protobuf_wrappers_pb.BoolValue.deserializeBinaryFromReader);
+      msg.setIsrental(value);
       break;
     default:
       reader.skipField();
@@ -292,130 +311,320 @@ proto.houseservice.House.prototype.serializeBinary = function() {
 proto.houseservice.House.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f != null) {
+    writer.writeMessage(
       1,
-      f
+      f,
+      google_protobuf_wrappers_pb.Int32Value.serializeBinaryToWriter
     );
   }
   f = message.getStreetname();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f != null) {
+    writer.writeMessage(
       2,
-      f
+      f,
+      google_protobuf_wrappers_pb.StringValue.serializeBinaryToWriter
     );
   }
   f = message.getHousenumber();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f != null) {
+    writer.writeMessage(
       3,
-      f
+      f,
+      google_protobuf_wrappers_pb.StringValue.serializeBinaryToWriter
     );
   }
   f = message.getSquarefeet();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f != null) {
+    writer.writeMessage(
       4,
-      f
+      f,
+      google_protobuf_wrappers_pb.Int32Value.serializeBinaryToWriter
     );
   }
   f = message.getNumberofbedrooms();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f != null) {
+    writer.writeMessage(
       5,
-      f
+      f,
+      google_protobuf_wrappers_pb.Int32Value.serializeBinaryToWriter
+    );
+  }
+  f = message.getOnsale();
+  if (f != null) {
+    writer.writeMessage(
+      6,
+      f,
+      google_protobuf_wrappers_pb.BoolValue.serializeBinaryToWriter
+    );
+  }
+  f = message.getIsrental();
+  if (f != null) {
+    writer.writeMessage(
+      7,
+      f,
+      google_protobuf_wrappers_pb.BoolValue.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional int32 id = 1;
- * @return {number}
+ * optional google.protobuf.Int32Value id = 1;
+ * @return {?proto.google.protobuf.Int32Value}
  */
 proto.houseservice.House.prototype.getId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type{?proto.google.protobuf.Int32Value} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.Int32Value, 1));
 };
 
 
 /**
- * @param {number} value
+ * @param {?proto.google.protobuf.Int32Value|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setId = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.houseservice.House} returns this
  */
-proto.houseservice.House.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.houseservice.House.prototype.clearId = function() {
+  return this.setId(undefined);
 };
 
 
 /**
- * optional string streetname = 2;
- * @return {string}
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasId = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional google.protobuf.StringValue streetname = 2;
+ * @return {?proto.google.protobuf.StringValue}
  */
 proto.houseservice.House.prototype.getStreetname = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type{?proto.google.protobuf.StringValue} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.StringValue, 2));
 };
 
 
 /**
- * @param {string} value
+ * @param {?proto.google.protobuf.StringValue|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setStreetname = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.houseservice.House} returns this
  */
-proto.houseservice.House.prototype.setStreetname = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+proto.houseservice.House.prototype.clearStreetname = function() {
+  return this.setStreetname(undefined);
 };
 
 
 /**
- * optional string housenumber = 3;
- * @return {string}
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasStreetname = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.StringValue housenumber = 3;
+ * @return {?proto.google.protobuf.StringValue}
  */
 proto.houseservice.House.prototype.getHousenumber = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type{?proto.google.protobuf.StringValue} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.StringValue, 3));
 };
 
 
 /**
- * @param {string} value
+ * @param {?proto.google.protobuf.StringValue|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setHousenumber = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.houseservice.House} returns this
  */
-proto.houseservice.House.prototype.setHousenumber = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+proto.houseservice.House.prototype.clearHousenumber = function() {
+  return this.setHousenumber(undefined);
 };
 
 
 /**
- * optional int32 squarefeet = 4;
- * @return {number}
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasHousenumber = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional google.protobuf.Int32Value squarefeet = 4;
+ * @return {?proto.google.protobuf.Int32Value}
  */
 proto.houseservice.House.prototype.getSquarefeet = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type{?proto.google.protobuf.Int32Value} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.Int32Value, 4));
 };
 
 
 /**
- * @param {number} value
+ * @param {?proto.google.protobuf.Int32Value|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setSquarefeet = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.houseservice.House} returns this
  */
-proto.houseservice.House.prototype.setSquarefeet = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+proto.houseservice.House.prototype.clearSquarefeet = function() {
+  return this.setSquarefeet(undefined);
 };
 
 
 /**
- * optional int32 numberOfBedrooms = 5;
- * @return {number}
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasSquarefeet = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional google.protobuf.Int32Value numberOfBedrooms = 5;
+ * @return {?proto.google.protobuf.Int32Value}
  */
 proto.houseservice.House.prototype.getNumberofbedrooms = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type{?proto.google.protobuf.Int32Value} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.Int32Value, 5));
 };
 
 
 /**
- * @param {number} value
+ * @param {?proto.google.protobuf.Int32Value|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setNumberofbedrooms = function(value) {
+  return jspb.Message.setWrapperField(this, 5, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.houseservice.House} returns this
  */
-proto.houseservice.House.prototype.setNumberofbedrooms = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+proto.houseservice.House.prototype.clearNumberofbedrooms = function() {
+  return this.setNumberofbedrooms(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasNumberofbedrooms = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
+ * optional google.protobuf.BoolValue onSale = 6;
+ * @return {?proto.google.protobuf.BoolValue}
+ */
+proto.houseservice.House.prototype.getOnsale = function() {
+  return /** @type{?proto.google.protobuf.BoolValue} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.BoolValue, 6));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.BoolValue|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setOnsale = function(value) {
+  return jspb.Message.setWrapperField(this, 6, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.houseservice.House} returns this
+ */
+proto.houseservice.House.prototype.clearOnsale = function() {
+  return this.setOnsale(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasOnsale = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional google.protobuf.BoolValue isRental = 7;
+ * @return {?proto.google.protobuf.BoolValue}
+ */
+proto.houseservice.House.prototype.getIsrental = function() {
+  return /** @type{?proto.google.protobuf.BoolValue} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.BoolValue, 7));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.BoolValue|undefined} value
+ * @return {!proto.houseservice.House} returns this
+*/
+proto.houseservice.House.prototype.setIsrental = function(value) {
+  return jspb.Message.setWrapperField(this, 7, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.houseservice.House} returns this
+ */
+proto.houseservice.House.prototype.clearIsrental = function() {
+  return this.setIsrental(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.houseservice.House.prototype.hasIsrental = function() {
+  return jspb.Message.getField(this, 7) != null;
 };
 
 

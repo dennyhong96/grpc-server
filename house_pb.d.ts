@@ -5,18 +5,44 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
+import * as google_protobuf_wrappers_pb from "google-protobuf/google/protobuf/wrappers_pb";
 
 export class House extends jspb.Message { 
-    getId(): number;
-    setId(value: number): House;
-    getStreetname(): string;
-    setStreetname(value: string): House;
-    getHousenumber(): string;
-    setHousenumber(value: string): House;
-    getSquarefeet(): number;
-    setSquarefeet(value: number): House;
-    getNumberofbedrooms(): number;
-    setNumberofbedrooms(value: number): House;
+
+    hasId(): boolean;
+    clearId(): void;
+    getId(): google_protobuf_wrappers_pb.Int32Value | undefined;
+    setId(value?: google_protobuf_wrappers_pb.Int32Value): House;
+
+    hasStreetname(): boolean;
+    clearStreetname(): void;
+    getStreetname(): google_protobuf_wrappers_pb.StringValue | undefined;
+    setStreetname(value?: google_protobuf_wrappers_pb.StringValue): House;
+
+    hasHousenumber(): boolean;
+    clearHousenumber(): void;
+    getHousenumber(): google_protobuf_wrappers_pb.StringValue | undefined;
+    setHousenumber(value?: google_protobuf_wrappers_pb.StringValue): House;
+
+    hasSquarefeet(): boolean;
+    clearSquarefeet(): void;
+    getSquarefeet(): google_protobuf_wrappers_pb.Int32Value | undefined;
+    setSquarefeet(value?: google_protobuf_wrappers_pb.Int32Value): House;
+
+    hasNumberofbedrooms(): boolean;
+    clearNumberofbedrooms(): void;
+    getNumberofbedrooms(): google_protobuf_wrappers_pb.Int32Value | undefined;
+    setNumberofbedrooms(value?: google_protobuf_wrappers_pb.Int32Value): House;
+
+    hasOnsale(): boolean;
+    clearOnsale(): void;
+    getOnsale(): google_protobuf_wrappers_pb.BoolValue | undefined;
+    setOnsale(value?: google_protobuf_wrappers_pb.BoolValue): House;
+
+    hasIsrental(): boolean;
+    clearIsrental(): void;
+    getIsrental(): google_protobuf_wrappers_pb.BoolValue | undefined;
+    setIsrental(value?: google_protobuf_wrappers_pb.BoolValue): House;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): House.AsObject;
@@ -30,11 +56,13 @@ export class House extends jspb.Message {
 
 export namespace House {
     export type AsObject = {
-        id: number,
-        streetname: string,
-        housenumber: string,
-        squarefeet: number,
-        numberofbedrooms: number,
+        id?: google_protobuf_wrappers_pb.Int32Value.AsObject,
+        streetname?: google_protobuf_wrappers_pb.StringValue.AsObject,
+        housenumber?: google_protobuf_wrappers_pb.StringValue.AsObject,
+        squarefeet?: google_protobuf_wrappers_pb.Int32Value.AsObject,
+        numberofbedrooms?: google_protobuf_wrappers_pb.Int32Value.AsObject,
+        onsale?: google_protobuf_wrappers_pb.BoolValue.AsObject,
+        isrental?: google_protobuf_wrappers_pb.BoolValue.AsObject,
     }
 }
 
