@@ -7,6 +7,7 @@ message House {
   string streetname = 2;
   string housenumber = 3;
   int32 squarefeet = 4;
+  int32 numberOfBedrooms = 5;
 }
 
 service HouseService {

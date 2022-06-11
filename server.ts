@@ -10,25 +10,30 @@ import {
   HousesRequest,
   HousesResponse,
 } from "./house_pb";
+import { Mapper } from "./mapping";
 
+// Mock DB
 const allHouse: House.AsObject[] = [
   {
     id: 1,
     housenumber: "123",
     squarefeet: 1200,
     streetname: "Funny Street",
+    numberofbedrooms: 3,
   },
   {
     id: 2,
     housenumber: "500",
     squarefeet: 2000,
     streetname: "Zoo",
+    numberofbedrooms: 1,
   },
   {
     id: 3,
     housenumber: "67",
     squarefeet: 890,
     streetname: "Spring Cir",
+    numberofbedrooms: 4,
   },
 ];
 
@@ -39,14 +44,11 @@ class HouseSerivce implements IHouseServiceServer {
   ) {
     // Get params from request
     const min = request.getMinsquarefeet();
-
     // Fetch data from DB
     const ids = allHouse.filter((h) => h.squarefeet >= min).map((h) => h.id);
-
     // Create a response
     const response = new HousesBySizeResponse();
     response.setIdsList(ids);
-
     // Send data back
     callback(null, response);
   }
@@ -57,14 +59,7 @@ class HouseSerivce implements IHouseServiceServer {
   ) {
     const id = request.getId();
     const houseObj = allHouse.find((h) => h.id === id);
-    let house: House | undefined = undefined;
-    if (houseObj) {
-      house = new House();
-      house.setId(houseObj.id);
-      house.setStreetname(houseObj.streetname);
-      house.setHousenumber(houseObj.housenumber);
-      house.setSquarefeet(houseObj.squarefeet);
-    }
+    const house = houseObj ? Mapper.house(houseObj) : undefined;
     const response = new HouseResponse();
     response.setHouse(house);
     callback(null, response);
@@ -76,14 +71,7 @@ class HouseSerivce implements IHouseServiceServer {
   ) {
     const ids = request.getIdsList();
     const houseObjs = allHouse.filter((h) => ids.includes(h.id));
-    const houses = houseObjs.map((houseObj) => {
-      const house = new House();
-      house.setId(houseObj.id);
-      house.setStreetname(houseObj.streetname);
-      house.setHousenumber(houseObj.housenumber);
-      house.setSquarefeet(houseObj.squarefeet);
-      return house;
-    });
+    const houses = Mapper.houses(houseObjs);
     const response = new HousesResponse();
     response.setHouseList(houses);
     callback(null, response);

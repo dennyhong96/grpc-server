@@ -15,6 +15,8 @@ export class House extends jspb.Message {
     setHousenumber(value: string): House;
     getSquarefeet(): number;
     setSquarefeet(value: number): House;
+    getNumberofbedrooms(): number;
+    setNumberofbedrooms(value: number): House;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): House.AsObject;
@@ -32,6 +34,7 @@ export namespace House {
         streetname: string,
         housenumber: string,
         squarefeet: number,
+        numberofbedrooms: number,
     }
 }
 

@@ -204,7 +204,8 @@ proto.houseservice.House.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     streetname: jspb.Message.getFieldWithDefault(msg, 2, ""),
     housenumber: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    squarefeet: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    squarefeet: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    numberofbedrooms: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -256,6 +257,10 @@ proto.houseservice.House.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setSquarefeet(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setNumberofbedrooms(value);
       break;
     default:
       reader.skipField();
@@ -311,6 +316,13 @@ proto.houseservice.House.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeInt32(
       4,
+      f
+    );
+  }
+  f = message.getNumberofbedrooms();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
       f
     );
   }
@@ -386,6 +398,24 @@ proto.houseservice.House.prototype.getSquarefeet = function() {
  */
 proto.houseservice.House.prototype.setSquarefeet = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int32 numberOfBedrooms = 5;
+ * @return {number}
+ */
+proto.houseservice.House.prototype.getNumberofbedrooms = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.houseservice.House} returns this
+ */
+proto.houseservice.House.prototype.setNumberofbedrooms = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
