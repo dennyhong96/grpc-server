@@ -6,12 +6,17 @@ package houseservice;
 
 message House {
   google.protobuf.Int32Value id = 1;
-  google.protobuf.StringValue streetname = 2;
-  google.protobuf.StringValue housenumber = 3;
-  google.protobuf.Int32Value squarefeet = 4;
-  google.protobuf.Int32Value numberOfBedrooms = 5;
-  google.protobuf.BoolValue onSale = 6;
-  google.protobuf.BoolValue isRental = 7;
+  google.protobuf.Int32Value squarefeet = 2;
+  google.protobuf.Int32Value numberOfBedrooms = 3;
+  google.protobuf.BoolValue onSale = 4;
+  google.protobuf.BoolValue isRental = 5;
+  google.protobuf.Int32Value ownerId = 6;
+  HouseAddress address = 7;
+}
+
+message HouseAddress {
+  google.protobuf.StringValue streetname = 1;
+  google.protobuf.StringValue housenumber = 2;
 }
 
 service HouseService {

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev ./server.ts",
     "grpc:gen": "chmod +x ./gen.sh && ./gen.sh",
-    "grpc:watch": "nodemon --watch house.proto --exec npm run grpc:gen",
+    "grpc:watch": "nodemon --watch *.proto --exec \"npm run grpc:gen\"",
     "debug": "NODE_ENV=development ts-node-dev --inspect --respawn ./server.ts"
   },
   "keywords": [],

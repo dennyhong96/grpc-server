@@ -1,27 +1,52 @@
-import { House } from "./house_pb";
+import { House, HouseAddress } from "./generated/house_pb";
 import {
   BoolValue,
   Int32Value,
   StringValue,
 } from "google-protobuf/google/protobuf/wrappers_pb";
+import { Person } from "./generated/person_pb";
 
 export class Mapper {
   public static house(houseObj: House.AsObject): House {
     const house = new House();
     house.setId(Mapper.castToInt32Value(houseObj.id));
-    house.setStreetname(Mapper.castToStringValue(houseObj.streetname));
-    house.setHousenumber(Mapper.castToStringValue(houseObj.housenumber));
+    house.setAddress(Mapper.address(houseObj.address));
     house.setSquarefeet(Mapper.castToInt32Value(houseObj.squarefeet));
     house.setNumberofbedrooms(
       Mapper.castToInt32Value(houseObj.numberofbedrooms)
     );
     house.setOnsale(Mapper.castToBoolValue(houseObj.onsale));
     house.setIsrental(Mapper.castToBoolValue(houseObj.isrental));
+    house.setOwnerid(Mapper.castToInt32Value(houseObj.ownerid));
     return house;
   }
 
   public static houses(houseObjs: House.AsObject[]): House[] {
     return houseObjs.map((houseObj) => Mapper.house(houseObj));
+  }
+
+  public static address(
+    addressObj: HouseAddress.AsObject | undefined
+  ): HouseAddress | undefined {
+    if (addressObj === undefined) return undefined;
+    const houseAddress = new HouseAddress();
+    houseAddress.setStreetname(Mapper.castToStringValue(addressObj.streetname));
+    houseAddress.setHousenumber(
+      Mapper.castToStringValue(addressObj.housenumber)
+    );
+    return houseAddress;
+  }
+
+  public static person(personObj: Person.AsObject): Person {
+    const person = new Person();
+    person.setId(Mapper.castToInt32Value(personObj.id));
+    person.setFirstname(Mapper.castToStringValue(personObj.firstname));
+    person.setLastname(Mapper.castToStringValue(personObj.lastname));
+    return person;
+  }
+
+  public static persons(personObjs: Person.AsObject[]): Person[] {
+    return personObjs.map((personObj) => Mapper.person(personObj));
   }
 
   // TODO: Use TS generic to refactor

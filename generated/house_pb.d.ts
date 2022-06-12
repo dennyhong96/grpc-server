@@ -14,16 +14,6 @@ export class House extends jspb.Message {
     getId(): google_protobuf_wrappers_pb.Int32Value | undefined;
     setId(value?: google_protobuf_wrappers_pb.Int32Value): House;
 
-    hasStreetname(): boolean;
-    clearStreetname(): void;
-    getStreetname(): google_protobuf_wrappers_pb.StringValue | undefined;
-    setStreetname(value?: google_protobuf_wrappers_pb.StringValue): House;
-
-    hasHousenumber(): boolean;
-    clearHousenumber(): void;
-    getHousenumber(): google_protobuf_wrappers_pb.StringValue | undefined;
-    setHousenumber(value?: google_protobuf_wrappers_pb.StringValue): House;
-
     hasSquarefeet(): boolean;
     clearSquarefeet(): void;
     getSquarefeet(): google_protobuf_wrappers_pb.Int32Value | undefined;
@@ -44,6 +34,16 @@ export class House extends jspb.Message {
     getIsrental(): google_protobuf_wrappers_pb.BoolValue | undefined;
     setIsrental(value?: google_protobuf_wrappers_pb.BoolValue): House;
 
+    hasOwnerid(): boolean;
+    clearOwnerid(): void;
+    getOwnerid(): google_protobuf_wrappers_pb.Int32Value | undefined;
+    setOwnerid(value?: google_protobuf_wrappers_pb.Int32Value): House;
+
+    hasAddress(): boolean;
+    clearAddress(): void;
+    getAddress(): HouseAddress | undefined;
+    setAddress(value?: HouseAddress): House;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): House.AsObject;
     static toObject(includeInstance: boolean, msg: House): House.AsObject;
@@ -57,12 +57,41 @@ export class House extends jspb.Message {
 export namespace House {
     export type AsObject = {
         id?: google_protobuf_wrappers_pb.Int32Value.AsObject,
-        streetname?: google_protobuf_wrappers_pb.StringValue.AsObject,
-        housenumber?: google_protobuf_wrappers_pb.StringValue.AsObject,
         squarefeet?: google_protobuf_wrappers_pb.Int32Value.AsObject,
         numberofbedrooms?: google_protobuf_wrappers_pb.Int32Value.AsObject,
         onsale?: google_protobuf_wrappers_pb.BoolValue.AsObject,
         isrental?: google_protobuf_wrappers_pb.BoolValue.AsObject,
+        ownerid?: google_protobuf_wrappers_pb.Int32Value.AsObject,
+        address?: HouseAddress.AsObject,
+    }
+}
+
+export class HouseAddress extends jspb.Message { 
+
+    hasStreetname(): boolean;
+    clearStreetname(): void;
+    getStreetname(): google_protobuf_wrappers_pb.StringValue | undefined;
+    setStreetname(value?: google_protobuf_wrappers_pb.StringValue): HouseAddress;
+
+    hasHousenumber(): boolean;
+    clearHousenumber(): void;
+    getHousenumber(): google_protobuf_wrappers_pb.StringValue | undefined;
+    setHousenumber(value?: google_protobuf_wrappers_pb.StringValue): HouseAddress;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): HouseAddress.AsObject;
+    static toObject(includeInstance: boolean, msg: HouseAddress): HouseAddress.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: HouseAddress, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): HouseAddress;
+    static deserializeBinaryFromReader(message: HouseAddress, reader: jspb.BinaryReader): HouseAddress;
+}
+
+export namespace HouseAddress {
+    export type AsObject = {
+        streetname?: google_protobuf_wrappers_pb.StringValue.AsObject,
+        housenumber?: google_protobuf_wrappers_pb.StringValue.AsObject,
     }
 }
 

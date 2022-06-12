@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package personservice;
+
+service PersonService {
+  rpc GetPerson(PersonRequest) returns(PersonResponse) {}
+  rpc GetPersons(PersonsRequest) returns(PersonsResponse) {}
+}
+
+message Person {
+  google.protobuf.Int32Value id = 1;
+  google.protobuf.StringValue firstname = 2;
+  google.protobuf.StringValue lastname = 3;
+}
+
+message PersonRequest {
+  int32 id = 1;
+}
+
+message PersonResponse {
+  Person person = 1;
+}
+
+message PersonsRequest {
+  repeated int32 ids = 1;
+}
+
+message PersonsResponse {
+  repeated Person person = 1;
+}
