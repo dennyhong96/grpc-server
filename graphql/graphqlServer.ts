@@ -1,8 +1,10 @@
+import path from "path";
 import express, { Request, Response } from "express";
 import { ApolloServer } from "apollo-server-express";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { loadFilesSync } from "@graphql-tools/load-files";
+import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 
-import { resolvers } from "./resolvers";
 import { CustomContext } from "./context/customContext";
 
 const PORT = 5600;
@@ -13,12 +15,17 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Server is up");
 });
 
-const schemas: string = "type Query{p:Test} type Test { id: Int!}";
+const typeDefs = mergeTypeDefs(
+  loadFilesSync(path.join(__dirname, "./schemas"))
+);
+const resolvers = mergeResolvers(
+  loadFilesSync(path.join(__dirname, "./resolvers")) as any
+);
 const services: any = {};
 const server = new ApolloServer({
   schema: makeExecutableSchema({
-    typeDefs: schemas,
-    resolvers: resolvers,
+    typeDefs,
+    resolvers,
   }),
   dataSources: () => {
     return services as any;
@@ -27,9 +34,7 @@ const server = new ApolloServer({
     // context.loaders = new DataLoaders(services);
     return context;
   },
-  // playground: true,
   introspection: true,
-  // tracing: true,
 });
 
 app.listen(PORT, () => {

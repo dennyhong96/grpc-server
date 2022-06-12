@@ -1,5 +1,5 @@
-import { House } from "../generated/house_pb";
-import { Person } from "../generated/person_pb";
+import { House } from "../generated/grpcServer/house_pb";
+import { Person } from "../generated/grpcServer/person_pb";
 
 // Mock DB
 export const allHouse: House.AsObject[] = [

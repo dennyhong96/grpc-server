@@ -1,0 +1,19 @@
+# root Query will be merged
+type Query {
+  houses: [House!]!
+}
+
+type House {
+  id: Int!
+  squarefeet: Int!
+  numberOfBedrooms: Int!
+  onSale: Boolean!
+  isRental: Boolean # nullable
+  owner: Person!
+  address: HouseAddress!
+}
+
+type HouseAddress {
+  houseNumber: String!
+  streetName: String!
+}

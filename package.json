@@ -8,12 +8,20 @@
     "grpc:debug": "NODE_ENV=development ts-node-dev --inspect --respawn ./grpcServer/server.ts",
     "grpc:gen": "chmod +x ./gen.sh && ./gen.sh",
     "grpc:watch": "nodemon --watch ./grpcServer/*.proto --exec \"npm run grpc:gen\"",
-    "graphql:start": "ts-node-dev ./graphql/graphqlServer.ts"
+    "graphql:start": "ts-node-dev ./graphql/graphqlServer.ts",
+    "graphql:gen:ts": "graphql-codegen --config codegengraphql.yml"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-codegen/add": "^3.1.1",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.5.1",
+    "@graphql-codegen/typescript-operations": "^2.4.2",
+    "@graphql-codegen/typescript-resolvers": "^2.6.6",
+    "@graphql-tools/load-files": "^6.5.4",
+    "@graphql-tools/merge": "^8.2.14",
     "@graphql-tools/schema": "^8.3.14",
     "apollo-server": "^3.8.2",
     "apollo-server-core": "^3.8.2",

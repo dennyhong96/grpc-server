@@ -1,7 +1,7 @@
 import grpc from "grpc";
 import { allHouse } from "../database";
 
-import { IHouseServiceServer } from "../generated/house_grpc_pb";
+import { IHouseServiceServer } from "../generated/grpcServer/house_grpc_pb";
 import {
   HouseRequest,
   HouseResponse,
@@ -9,7 +9,7 @@ import {
   HousesBySizeResponse,
   HousesRequest,
   HousesResponse,
-} from "../generated/house_pb";
+} from "../generated/grpcServer/house_pb";
 import { Mapper } from "../grpcServer/mapping";
 
 export class HouseSerivce implements IHouseServiceServer {

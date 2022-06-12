@@ -1,13 +1,13 @@
 import grpc from "grpc";
 import { allPeople } from "../database";
 
-import { IPersonServiceServer } from "../generated/person_grpc_pb";
+import { IPersonServiceServer } from "../generated/grpcServer/person_grpc_pb";
 import {
   PersonRequest,
   PersonResponse,
   PersonsRequest,
   PersonsResponse,
-} from "../generated/person_pb";
+} from "../generated/grpcServer/person_pb";
 import { Mapper } from "../grpcServer/mapping";
 
 export class PersonService implements IPersonServiceServer {

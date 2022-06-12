@@ -1,0 +1,11 @@
+type Query {
+  persons: [Person!]!
+}
+
+type Person {
+  id: Int!
+  firstname: String!
+  lastname: String!
+  fullname: String! # doesn't exist in gRpc
+  houses: [House!]
+}

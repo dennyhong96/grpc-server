@@ -3,11 +3,11 @@ import grpc from "grpc";
 import {
   HouseServiceService,
   IHouseServiceServer,
-} from "../generated/house_grpc_pb";
+} from "../generated/grpcServer/house_grpc_pb";
 import {
   IPersonServiceServer,
   PersonServiceService,
-} from "../generated/person_grpc_pb";
+} from "../generated/grpcServer/person_grpc_pb";
 import { HouseSerivce } from "../services/houseService";
 import { PersonService } from "../services/personService";
 
