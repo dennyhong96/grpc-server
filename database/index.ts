@@ -45,10 +45,12 @@ export const allPeople: Person.AsObject[] = [
     id: { value: 1 },
     firstname: { value: "Patrick" },
     lastname: { value: "Desjardins" },
+    houseidsList: [{ value: 1 }, { value: 2 }],
   },
   {
     id: { value: 2 },
     firstname: { value: "John" },
     lastname: { value: "Smith" },
+    houseidsList: [{ value: 3 }],
   },
 ];

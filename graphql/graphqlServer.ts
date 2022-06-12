@@ -6,6 +6,9 @@ import { loadFilesSync } from "@graphql-tools/load-files";
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 
 import { CustomContext } from "./context/customContext";
+import { CustomDataSources } from "./datasources";
+import { HouseClient } from "../grpcClient/houseClient";
+import { PersonClient } from "../grpcClient/personClient";
 
 const PORT = 5600;
 
@@ -21,7 +24,10 @@ const typeDefs = mergeTypeDefs(
 const resolvers = mergeResolvers(
   loadFilesSync(path.join(__dirname, "./resolvers")) as any
 );
-const services: any = {};
+const services: CustomDataSources = {
+  houseService: new HouseClient(),
+  personService: new PersonClient(),
+};
 const server = new ApolloServer({
   schema: makeExecutableSchema({
     typeDefs,

@@ -23,6 +23,10 @@ export class Person extends jspb.Message {
     clearLastname(): void;
     getLastname(): google_protobuf_wrappers_pb.StringValue | undefined;
     setLastname(value?: google_protobuf_wrappers_pb.StringValue): Person;
+    clearHouseidsList(): void;
+    getHouseidsList(): Array<google_protobuf_wrappers_pb.Int32Value>;
+    setHouseidsList(value: Array<google_protobuf_wrappers_pb.Int32Value>): Person;
+    addHouseids(value?: google_protobuf_wrappers_pb.Int32Value, index?: number): google_protobuf_wrappers_pb.Int32Value;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Person.AsObject;
@@ -39,6 +43,7 @@ export namespace Person {
         id?: google_protobuf_wrappers_pb.Int32Value.AsObject,
         firstname?: google_protobuf_wrappers_pb.StringValue.AsObject,
         lastname?: google_protobuf_wrappers_pb.StringValue.AsObject,
+        houseidsList: Array<google_protobuf_wrappers_pb.Int32Value.AsObject>,
     }
 }
 

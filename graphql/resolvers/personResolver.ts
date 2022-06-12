@@ -1,15 +1,16 @@
 import { GraphQLResolveInfo } from "graphql";
 
-import { allPeople, allHouse } from "../../database";
 import {
   Person as PersonGraphql,
   House as HouseGraphql,
   PersonResolvers,
   Query,
   QueryResolvers,
+  QueryPersonsArgs,
 } from "../../generated/graphql/types";
 import { Person as PersonGrpc } from "../../generated/grpcServer/person_pb";
-import { House as HouseGrpc } from "../../generated/grpcServer/house_pb";
+import { CustomContext } from "../context/customContext";
+import { GrpcGraphQLMapper } from "../mappers";
 
 export const personResolver: {
   Person: PersonResolvers;
@@ -18,18 +19,14 @@ export const personResolver: {
   Query: {
     persons: async (
       source: Partial<Query>, // root
-      args: {},
-      context: any,
+      args: QueryPersonsArgs,
+      context: CustomContext,
       info: GraphQLResolveInfo
     ): Promise<PersonGraphql[]> => {
-      return allPeople.map((h: PersonGrpc.AsObject) => {
-        return {
-          id: h.id?.value ?? -1,
-          firstname: h.firstname?.value ?? "",
-          lastname: h.lastname?.value ?? "",
-          fullname: h.firstname?.value + " " + h.lastname?.value,
-        };
-      });
+      const getListPersonRes =
+        await context.dataSources.personService.getListPerson(args.ids);
+      const allPersons: PersonGrpc[] = getListPersonRes.getPersonList();
+      return GrpcGraphQLMapper.personsFromResponse(allPersons);
     },
   },
 
@@ -38,7 +35,7 @@ export const personResolver: {
     fullname: async (
       source: Partial<PersonGraphql>, // resolved PersonGraphql object
       args: {},
-      context: any,
+      context: CustomContext,
       info: GraphQLResolveInfo
     ): Promise<string> => {
       return source.firstname + " " + source.lastname;
@@ -46,26 +43,25 @@ export const personResolver: {
     houses: async (
       source: Partial<PersonGraphql>,
       args: {},
-      context: any,
+      context: CustomContext,
       info: GraphQLResolveInfo
     ): Promise<HouseGraphql[]> => {
-      const houses = allHouse.filter((d) => d.ownerid?.value === source.id);
-      return houses.map((h: HouseGrpc.AsObject) => {
-        return {
-          id: h.id?.value ?? -1,
-          address: {
-            streetName: h.address?.streetname?.value ?? "",
-            houseNumber: h.address?.housenumber?.value ?? "",
-          },
-          numberOfBedrooms: h.numberofbedrooms?.value ?? 0,
-          onSale: h.onsale?.value ?? false,
-          squarefeet: h.squarefeet?.value ?? 0,
-          isRental: h.isrental?.value ?? false,
-          owner: { id: h.ownerid?.value } as any as PersonGraphql,
-        };
-      });
+      const personId = source.id;
+      if (!personId) return [];
+      const getPersonRes = await context.dataSources.personService.getPerson(
+        personId
+      );
+      const houseIds =
+        getPersonRes
+          .getPerson()
+          ?.getHouseidsList()
+          .map((idInt32) => idInt32.getValue()) ?? [];
+      const getListHousesRes =
+        await context.dataSources.houseService.getListHouses(houseIds);
+      const housesGrpc = getListHousesRes.getHouseList();
+      return GrpcGraphQLMapper.housesFromResponse(housesGrpc);
     },
   },
 };
 
-export default personResolver;
+export default personResolver; // for mergeResolvers

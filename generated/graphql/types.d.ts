@@ -4,6 +4,7 @@ export type InputMaybe<T> = T | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -43,6 +44,16 @@ export type Query = {
   __typename?: 'Query';
   houses: Array<House>;
   persons: Array<Person>;
+};
+
+
+export type QueryHousesArgs = {
+  ids: Array<Scalars['Int']>;
+};
+
+
+export type QueryPersonsArgs = {
+  ids: Array<Scalars['Int']>;
 };
 
 
@@ -161,8 +172,8 @@ export type PersonResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  houses?: Resolver<Array<ResolversTypes['House']>, ParentType, ContextType>;
-  persons?: Resolver<Array<ResolversTypes['Person']>, ParentType, ContextType>;
+  houses?: Resolver<Array<ResolversTypes['House']>, ParentType, ContextType, RequireFields<QueryHousesArgs, 'ids'>>;
+  persons?: Resolver<Array<ResolversTypes['Person']>, ParentType, ContextType, RequireFields<QueryPersonsArgs, 'ids'>>;
 };
 
 export type Resolvers<ContextType = any> = {

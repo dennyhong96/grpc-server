@@ -33,7 +33,7 @@ goog.exportSymbol('proto.personservice.PersonsResponse', null, global);
  * @constructor
  */
 proto.personservice.Person = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.personservice.Person.repeatedFields_, null);
 };
 goog.inherits(proto.personservice.Person, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -128,6 +128,13 @@ if (goog.DEBUG && !COMPILED) {
   proto.personservice.PersonsResponse.displayName = 'proto.personservice.PersonsResponse';
 }
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.personservice.Person.repeatedFields_ = [4];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -161,7 +168,9 @@ proto.personservice.Person.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: (f = msg.getId()) && google_protobuf_wrappers_pb.Int32Value.toObject(includeInstance, f),
     firstname: (f = msg.getFirstname()) && google_protobuf_wrappers_pb.StringValue.toObject(includeInstance, f),
-    lastname: (f = msg.getLastname()) && google_protobuf_wrappers_pb.StringValue.toObject(includeInstance, f)
+    lastname: (f = msg.getLastname()) && google_protobuf_wrappers_pb.StringValue.toObject(includeInstance, f),
+    houseidsList: jspb.Message.toObjectList(msg.getHouseidsList(),
+    google_protobuf_wrappers_pb.Int32Value.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -212,6 +221,11 @@ proto.personservice.Person.deserializeBinaryFromReader = function(msg, reader) {
       var value = new google_protobuf_wrappers_pb.StringValue;
       reader.readMessage(value,google_protobuf_wrappers_pb.StringValue.deserializeBinaryFromReader);
       msg.setLastname(value);
+      break;
+    case 4:
+      var value = new google_protobuf_wrappers_pb.Int32Value;
+      reader.readMessage(value,google_protobuf_wrappers_pb.Int32Value.deserializeBinaryFromReader);
+      msg.addHouseids(value);
       break;
     default:
       reader.skipField();
@@ -264,6 +278,14 @@ proto.personservice.Person.serializeBinaryToWriter = function(message, writer) {
       3,
       f,
       google_protobuf_wrappers_pb.StringValue.serializeBinaryToWriter
+    );
+  }
+  f = message.getHouseidsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      google_protobuf_wrappers_pb.Int32Value.serializeBinaryToWriter
     );
   }
 };
@@ -377,6 +399,44 @@ proto.personservice.Person.prototype.clearLastname = function() {
  */
 proto.personservice.Person.prototype.hasLastname = function() {
   return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * repeated google.protobuf.Int32Value houseIds = 4;
+ * @return {!Array<!proto.google.protobuf.Int32Value>}
+ */
+proto.personservice.Person.prototype.getHouseidsList = function() {
+  return /** @type{!Array<!proto.google.protobuf.Int32Value>} */ (
+    jspb.Message.getRepeatedWrapperField(this, google_protobuf_wrappers_pb.Int32Value, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.google.protobuf.Int32Value>} value
+ * @return {!proto.personservice.Person} returns this
+*/
+proto.personservice.Person.prototype.setHouseidsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Int32Value=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.google.protobuf.Int32Value}
+ */
+proto.personservice.Person.prototype.addHouseids = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.google.protobuf.Int32Value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.personservice.Person} returns this
+ */
+proto.personservice.Person.prototype.clearHouseidsList = function() {
+  return this.setHouseidsList([]);
 };
 
 

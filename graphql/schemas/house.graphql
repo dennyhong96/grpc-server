@@ -1,6 +1,6 @@
 # root Query will be merged
 type Query {
-  houses: [House!]!
+  houses(ids: [Int!]!): [House!]!
 }
 
 type House {

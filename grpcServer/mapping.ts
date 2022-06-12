@@ -42,6 +42,9 @@ export class Mapper {
     person.setId(Mapper.castToInt32Value(personObj.id));
     person.setFirstname(Mapper.castToStringValue(personObj.firstname));
     person.setLastname(Mapper.castToStringValue(personObj.lastname));
+    person.setHouseidsList(
+      personObj.houseidsList.map((houseId) => Mapper.castToInt32Value(houseId)!)
+    );
     return person;
   }
 
