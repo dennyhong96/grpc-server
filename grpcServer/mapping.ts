@@ -1,10 +1,10 @@
-import { House, HouseAddress } from "./generated/house_pb";
+import { House, HouseAddress } from "../generated/house_pb";
 import {
   BoolValue,
   Int32Value,
   StringValue,
 } from "google-protobuf/google/protobuf/wrappers_pb";
-import { Person } from "./generated/person_pb";
+import { Person } from "../generated/person_pb";
 
 export class Mapper {
   public static house(houseObj: House.AsObject): House {

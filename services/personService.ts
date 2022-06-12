@@ -8,7 +8,7 @@ import {
   PersonsRequest,
   PersonsResponse,
 } from "../generated/person_pb";
-import { Mapper } from "../mapping";
+import { Mapper } from "../grpcServer/mapping";
 
 export class PersonService implements IPersonServiceServer {
   getPerson(

@@ -10,7 +10,7 @@ import {
   HousesRequest,
   HousesResponse,
 } from "../generated/house_pb";
-import { Mapper } from "../mapping";
+import { Mapper } from "../grpcServer/mapping";
 
 export class HouseSerivce implements IHouseServiceServer {
   public getHousesBySize(
