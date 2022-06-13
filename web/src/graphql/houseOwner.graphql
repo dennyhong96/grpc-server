@@ -1,0 +1,10 @@
+query UserHouse($ids: [Int!]!) {
+  houses(ids: $ids) {
+    id
+    squarefeet
+    owner {
+      id
+      fullname
+    }
+  }
+}

@@ -1,0 +1,13 @@
+schema: "http://127.0.0.1:5600/graphql"
+documents: "./web/**/*.graphql"
+overwrite: true
+generates:
+  ./web/src/generated/typesFromGraphql.ts:
+    config:
+      maybeValue: T | undefined
+      preResolveTypes: true
+      avoidOptionals: true
+    plugins:
+      - typescript
+      - typescript-operations
+require: ["ts-node/register"]

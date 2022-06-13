@@ -9,7 +9,8 @@
     "grpc:gen": "chmod +x ./gen.sh && ./gen.sh",
     "grpc:watch": "nodemon --watch ./grpcServer/*.proto --exec \"npm run grpc:gen\"",
     "graphql:start": "ts-node-dev ./graphql/graphqlServer.ts",
-    "graphql:gen:ts": "graphql-codegen --config codegengraphql.yml"
+    "graphql:gen:ts": "graphql-codegen --config codegengraphql.yml",
+    "web:generate:ts": "graphql-codegen --config codegenweb.yml"
   },
   "keywords": [],
   "author": "",
