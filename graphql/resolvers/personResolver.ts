@@ -8,7 +8,6 @@ import {
   QueryResolvers,
   QueryPersonsArgs,
 } from "../../generated/graphql/types";
-import { Person as PersonGrpc } from "../../generated/grpcServer/person_pb";
 import { CustomContext } from "../context/customContext";
 import { GrpcGraphQLMapper } from "../mappers";
 
@@ -23,9 +22,7 @@ export const personResolver: {
       context: CustomContext,
       info: GraphQLResolveInfo
     ): Promise<PersonGraphql[]> => {
-      const getListPersonRes =
-        await context.dataSources.personService.getListPerson(args.ids);
-      const allPersons: PersonGrpc[] = getListPersonRes.getPersonList();
+      const allPersons = await context.loaders.Person.getPersons.load(args.ids);
       return GrpcGraphQLMapper.personsFromResponse(allPersons);
     },
   },
@@ -48,17 +45,11 @@ export const personResolver: {
     ): Promise<HouseGraphql[]> => {
       const personId = source.id;
       if (!personId) return [];
-      const getPersonRes = await context.dataSources.personService.getPerson(
-        personId
-      );
+      const personGrpc = await context.loaders.Person.getPerson.load(personId);
       const houseIds =
-        getPersonRes
-          .getPerson()
-          ?.getHouseidsList()
-          .map((idInt32) => idInt32.getValue()) ?? [];
-      const getListHousesRes =
-        await context.dataSources.houseService.getListHouses(houseIds);
-      const housesGrpc = getListHousesRes.getHouseList();
+        personGrpc?.getHouseidsList().map((idInt32) => idInt32.getValue()) ??
+        [];
+      const housesGrpc = await context.loaders.House.getHouses.load(houseIds);
       return GrpcGraphQLMapper.housesFromResponse(housesGrpc);
     },
   },

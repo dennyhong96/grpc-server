@@ -48,6 +48,7 @@ export class HouseSerivce implements IHouseServiceServer {
     const house = houseObj ? Mapper.house(houseObj) : undefined;
     const response = new HouseResponse();
     response.setHouse(house);
+    console.log("getHouse called");
     callback(null, response);
   }
 
@@ -62,6 +63,7 @@ export class HouseSerivce implements IHouseServiceServer {
     const houses = Mapper.houses(houseObjs);
     const response = new HousesResponse();
     response.setHouseList(houses);
+    console.log("getHouse called");
     callback(null, response);
   }
 }

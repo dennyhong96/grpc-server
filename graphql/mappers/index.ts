@@ -31,14 +31,32 @@ export class GrpcGraphQLMapper {
   }
 
   public static personsFromResponse(
-    personsGrpc: PersonGrpc[]
+    personsGrpc: (PersonGrpc | undefined)[]
   ): PersonGraphQL[] {
     return personsGrpc
-      .map((personGrpc) => personGrpc.toObject(true))
+      .map((personGrpc) =>
+        personGrpc === undefined ? personGrpc : personGrpc.toObject(true)
+      )
       .map((personGrpcObj) => GrpcGraphQLMapper.person(personGrpcObj));
   }
 
-  public static house(houseGrpcObj: HouseGrpc.AsObject): HouseGraphQL {
+  public static house(
+    houseGrpcObj: HouseGrpc.AsObject | undefined
+  ): HouseGraphQL {
+    if (houseGrpcObj === undefined) {
+      return {
+        id: -1,
+        owner: this.person(undefined),
+        address: {
+          streetName: "",
+          houseNumber: "",
+        },
+        numberOfBedrooms: 0,
+        onSale: false,
+        squarefeet: 0,
+        isRental: false,
+      };
+    }
     return {
       id: houseGrpcObj.id?.value ?? -1,
       address: {
@@ -59,9 +77,13 @@ export class GrpcGraphQLMapper {
     return housesGrpcObjs.map((p) => GrpcGraphQLMapper.house(p));
   }
 
-  public static housesFromResponse(housesGrpc: HouseGrpc[]): HouseGraphQL[] {
+  public static housesFromResponse(
+    housesGrpc: (HouseGrpc | undefined)[]
+  ): HouseGraphQL[] {
     return housesGrpc
-      .map((houseGrpc) => houseGrpc.toObject(true))
+      .map((houseGrpc) =>
+        houseGrpc === undefined ? houseGrpc : houseGrpc.toObject(true)
+      )
       .map((houseGrpcObj) => GrpcGraphQLMapper.house(houseGrpcObj));
   }
 }

@@ -23,8 +23,10 @@ export class PersonService implements IPersonServiceServer {
     const person =
       personObj !== undefined ? Mapper.person(personObj) : undefined;
     response.setPerson(person);
+    console.log("getPerson called");
     callback(null, response);
   }
+
   getPersons(
     { request }: grpc.ServerUnaryCall<PersonsRequest>,
     callback: grpc.sendUnaryData<PersonsResponse>
@@ -36,6 +38,7 @@ export class PersonService implements IPersonServiceServer {
     const response = new PersonsResponse();
     const persons = Mapper.persons(personObjs);
     response.setPersonList(persons);
+    console.log("getPersons called");
     callback(null, response);
   }
 }

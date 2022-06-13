@@ -9,6 +9,7 @@ import { CustomContext } from "./context/customContext";
 import { CustomDataSources } from "./datasources";
 import { HouseClient } from "../grpcClient/houseClient";
 import { PersonClient } from "../grpcClient/personClient";
+import { DataLoaders } from "./context/dataloaders";
 
 const PORT = 5600;
 
@@ -37,7 +38,7 @@ const server = new ApolloServer({
     return services as any;
   },
   context: (context: CustomContext) => {
-    // context.loaders = new DataLoaders(services);
+    context.loaders = new DataLoaders(services);
     return context;
   },
   introspection: true,

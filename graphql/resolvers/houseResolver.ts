@@ -22,9 +22,7 @@ export const houseResolver: {
       context: CustomContext, // for auth, etc.
       info: GraphQLResolveInfo
     ): Promise<HouseGraphQL[]> => {
-      const getListHousesRes =
-        await context.dataSources.houseService.getListHouses(args.ids);
-      const houses = getListHousesRes.getHouseList();
+      const houses = await context.loaders.House.getHouses.load(args.ids);
       return GrpcGraphQLMapper.housesFromResponse(houses);
     },
   },
@@ -37,11 +35,9 @@ export const houseResolver: {
       context: CustomContext,
       info: GraphQLResolveInfo
     ): Promise<PersonGraphQL> => {
-      const ownerId = source.owner?.id ?? -1;
-      const getPersonRes = await context.dataSources.personService.getPerson(
-        ownerId
+      const personGrpc = await context.loaders.Person.getPerson.load(
+        source.owner?.id ?? -1
       );
-      const personGrpc = getPersonRes.getPerson();
       if (personGrpc === undefined) {
         return GrpcGraphQLMapper.person(undefined);
       }
